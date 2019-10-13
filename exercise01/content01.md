@@ -1,4 +1,4 @@
-# 06.10.2019
+# 07.10.2019
 
 ### What are we going to talk about today?
 1. What is an abstract data type
