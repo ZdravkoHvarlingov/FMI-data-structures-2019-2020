@@ -14,5 +14,5 @@
 3. Given a list of numbers, find the number of occurences of each element:
    -    [1, -1, 2, 1, 10] -> -1: 1, 1: 2, 2: 1, 10: 1
 4. Given a list of numbers, construct another list which does not contain duplicates;
-5. Given two lists of numbers, check if they are completely the same;
+5. Given two lists of numbers, check if they are completely the same(same length, if element a is present K times in one of the arrays, it should be present K times in the other array) or in another way - one of them is a permutation of the other one;
 6. Given a list of sorted numbers, check if there are two numbers A and B which has sum equal to C(A + B = C). You receive C as an argument;
