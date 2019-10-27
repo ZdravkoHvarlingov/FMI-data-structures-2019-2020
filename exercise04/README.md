@@ -6,7 +6,7 @@
 3. Traversals: in order traversal, post order traversal, pre order traversal(DFS for a tree);
 
 
-### Task descriptions - sorting should be used in each of the tasks
+### Task descriptions
 1. Create struct representing a binary tree with numbers as node values;
 2. Create all the tree traversals - in, pre, post order traverals;
 3. Find the sum of all elements inside the tree;
