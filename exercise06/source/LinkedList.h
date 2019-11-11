@@ -1,47 +1,70 @@
 #pragma once
 
+using FilterFunc = bool(*)(int);
 
 class LinkedList
 {
+public:
+	class Iterator;
+	class FilterIterator;
+
+	LinkedList();
+	LinkedList(const LinkedList& other);
+	
+	void add(int);
+	Iterator begin();
+	Iterator end();
+
+	FilterIterator begin_filter(FilterFunc);
+	FilterIterator end_filter(FilterFunc);
+	
+	LinkedList& operator=(LinkedList other);
+	~LinkedList();
+
 private:
 	struct Node
 	{
 		int value;
 		Node* next;
 
-		Node(int, Node*);
+		Node(int value, Node* next);
 	};
+
+	void delete_helper(Node*);
+
+	Node* head;
 
 public:
 	class Iterator
 	{
+	public:
 		friend class LinkedList;
 
-	public:
 		void operator++();
-		int& operator*() const;
+		int& operator*();
 
 		bool operator!=(const Iterator& other) const;
-
 	private:
 		Iterator(Node* head);
 
 		Node* crr;
 	};
 
-	LinkedList();
-	LinkedList(const LinkedList& other);
 
-	void push(int);
-	Iterator begin();
-	Iterator end();
+	class FilterIterator
+	{
+	public:
+		friend class LinkedList;
 
+		void operator++();
+		int& operator*();
 
-	LinkedList& operator=(LinkedList other);
-	~LinkedList();
-	
-private:
-	void delete_helper(Node*);
+		bool operator!=(const FilterIterator& other) const;
+	private:
+		FilterIterator(Node* head, FilterFunc f);
+		void next();
 
-	Node* head;
+		Node* crr;
+		FilterFunc filterFunction;
+	};
 };

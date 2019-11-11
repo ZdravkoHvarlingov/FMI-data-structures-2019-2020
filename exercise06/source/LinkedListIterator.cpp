@@ -5,22 +5,23 @@
 #include "LinkedList.h"
 
 
-void print_linked_list(LinkedList& ll)
+bool IsEven(int num)
 {
-	for (LinkedList::Iterator it = ll.begin(); it != ll.end(); ++it)
-	{
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl;
+	return num % 2 == 0;
 }
-
 
 int main()
 {
 	LinkedList ll;
-	ll.push(10);
-	ll.push(11);
-	ll.push(12);
+	for (size_t i = 0; i < 10; i++)
+	{
+		ll.add(i);
+	}
 
-	print_linked_list(ll);
+	for (LinkedList::FilterIterator it = ll.begin_filter(IsEven); it != ll.end_filter(IsEven); ++it)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+    std::cout << "Hello World!\n";
 }

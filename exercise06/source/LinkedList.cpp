@@ -8,17 +8,15 @@ LinkedList::LinkedList()
 }
 
 LinkedList::LinkedList(const LinkedList& other)
-	: LinkedList()
 {
-	Node *crr = other.head;
+	Node* crr = other.head;
 	while (crr != nullptr)
 	{
-		push(crr->value);
-		crr = crr->next;
+		add(crr->value);
 	}
 }
 
-void LinkedList::push(int value)
+void LinkedList::add(int value)
 {
 	head = new Node(value, head);
 }
@@ -31,6 +29,16 @@ LinkedList::Iterator LinkedList::begin()
 LinkedList::Iterator LinkedList::end()
 {
 	return Iterator(nullptr);
+}
+
+LinkedList::FilterIterator LinkedList::begin_filter(FilterFunc f)
+{
+	return FilterIterator(head, f);
+}
+
+LinkedList::FilterIterator LinkedList::end_filter(FilterFunc f)
+{
+	return FilterIterator(nullptr, f);
 }
 
 LinkedList& LinkedList::operator=(LinkedList other)
@@ -56,17 +64,16 @@ void LinkedList::delete_helper(Node *crr)
 	delete crr;
 }
 
-LinkedList::Node::Node(int value, Node *next)
+LinkedList::Node::Node(int value, Node* next = nullptr)
 	: value(value), next(next)
-{
-}
+{}
 
 void LinkedList::Iterator::operator++()
 {
 	crr = crr->next;
 }
 
-int& LinkedList::Iterator::operator*() const
+int& LinkedList::Iterator::operator*()
 {
 	return crr->value;
 }
@@ -79,3 +86,33 @@ bool LinkedList::Iterator::operator!=(const Iterator& other) const
 LinkedList::Iterator::Iterator(Node* head)
 	: crr(head)
 {}
+
+void LinkedList::FilterIterator::operator++()
+{
+	crr = crr->next;
+	next();
+}
+
+int& LinkedList::FilterIterator::operator*()
+{
+	return crr->value;
+}
+
+bool LinkedList::FilterIterator::operator!=(const FilterIterator& other) const
+{
+	return crr != other.crr || filterFunction != other.filterFunction;
+}
+
+LinkedList::FilterIterator::FilterIterator(Node* head, FilterFunc f)
+	: crr(head), filterFunction(f)
+{
+	next();
+}
+
+void LinkedList::FilterIterator::next()
+{
+	while (crr != nullptr && !filterFunction(crr->value))
+	{
+		crr = crr->next;
+	}
+}
