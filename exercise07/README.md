@@ -2,8 +2,6 @@
 
 ### What are we going to talk about today?
 1. Binary search tree - how it works, implementation using OOP;
-2. BFS on a tree(level traversal)
-
 
 ### Task descriptions
 1. Implement the binary search tree with tree methods
