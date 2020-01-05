@@ -19,7 +19,7 @@
     -   make a method, which given a sentence returns if there is a path from the root to a leaf node which describe exactly this sentence. Return the chain of people who made the words;
     -   consider that every two labels should be concatenated with a single space;
     ![example tree](example-tree.png)
-    - for example in the given tree "Car is the thing I want" is inside the tree with chain Arnold -> Ivet -> Radancho. SDP is an awesome subject is not inside the tree;
+    - for example in the given tree "Car is the thing I want" is inside the tree with chain Arnold -> Ivet -> Radancho. "SDP is an awesome subject!" is not inside the tree;
 
 ### Tips: 
 1. use map/hash map to represent the edges comming out of a specific node;
